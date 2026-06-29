@@ -1,0 +1,55 @@
+/* Pills (for month & kingdom) */
+.bio-month .shiny-options-group,
+.bio-kingdom .shiny-options-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.bio-month .radio,
+.bio-kingdom .radio {
+  margin: 0;
+}
+.bio-month .radio input[type="radio"],
+.bio-kingdom .radio input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.bio-month .radio label,
+.bio-kingdom .radio label {
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+.bio-month .radio label .pill,
+.bio-kingdom .radio label .pill {
+  display: inline-block;
+  padding: 6px 10px;
+  border: 1px solid #cfd8dc;
+  border-radius: 999px;
+  background: #fafafa;
+  font-size: 12px;
+  line-height: 1;
+  transition: all 0.15s ease;
+}
+.bio-month .radio label:hover .pill,
+.bio-kingdom .radio label:hover .pill {
+  border-color: #26a69a;
+}
+.bio-month .radio label input[type="radio"]:checked ~ .pill,
+.bio-kingdom .radio label input[type="radio"]:checked ~ .pill {
+  background: #004d40;
+  color: #fff;
+  border-color: #004d40;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+/* Panel & links */
+.bio-filter-panel a.btn.btn-link {
+  color: #00695c;
+  text-decoration: none;
+}
+.bio-filter-panel a.btn.btn-link:hover {
+  text-decoration: underline;
+}

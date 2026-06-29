@@ -1,0 +1,113 @@
+/* -------- index.css -------- */
+/* -------- Ultra-compact Top Bar -------- */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  height: 48px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: saturate(160%) blur(6px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.topbar-brand {
+  font-family: "Schoolbell", cursive, sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1.5rem;
+  color: #5e7160;
+  letter-spacing: .5px;
+}
+
+.topbar-brand2 {
+  font-family: "Schoolbell", cursive, sans-serif;
+  font-weight: 200;
+  font-style: normal;
+  font-size: 1rem;
+  color: #5e7160;
+  letter-spacing: .5px;
+}
+
+
+.topbar-tabs .nav-link {
+  padding: .30rem .55rem;
+  /* Narrower */
+  font-size: .88rem;
+  line-height: 1;
+  border-radius: 999px;
+  font-weight: 600;
+  color: #5e7160;
+}
+
+.topbar-tabs .nav-link:not(.active):hover {
+  text-decoration: none;
+  color: #5e7160;
+}
+
+/* Spacing between main body and top bar (adjust or remove as needed) */
+.tab-body {
+  margin-top: .75rem;
+}
+
+/* Container flush with edges, consistent with screenshot */
+.container-fluid.px-0 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .topbar {
+    height: 56px;
+    padding: 8px 10px;
+    flex-wrap: wrap;
+  }
+
+  .topbar-tabs {
+    width: 100%;
+    margin-top: 6px;
+    gap: .4rem;
+    overflow-x: auto;
+  }
+}
+
+
+/* Remove white gap, flush with top bar */
+
+/* 1️⃣ Remove default padding/margin from entire page */
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 100%;
+  overflow: hidden;  /* Prevent scrollbar if map is too large */
+}
+
+/* 2️⃣ Make outermost container flush with top bar */
+.container-fluid,
+.page-fluid,
+.bslib-page,
+#mainNav {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* 3️⃣ Also remove outer margin from top bar */
+.topbar {
+  margin: 0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Optional, remove bottom border */
+}
+
+.brand-logo{
+  height: 40px;                 /* 20–24 works, 22px looks good in 56px top bar */
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 4px;           /* Keep for subtle rounded corners if PNG, can remove for SVG */
+  object-fit: contain;
+}
+
+
+
+

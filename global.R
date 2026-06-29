@@ -11,6 +11,10 @@ library(htmltools)
 library(tibble)
 library(leaflet)
 library(leaflet.extras)
+library(ggplot2)
+
+
+source("tableau-in-shiny-v1.2.R")
 
 # ---------- Data Helper ----------
 
@@ -96,3 +100,13 @@ read_and_normalize_points <- function(path) {
   out$name[is.na(out$name) | out$name == ""] <- "(no name)"
   out
 }
+
+# global
+points_data <- read_csv("./dataset/garden.csv", show_col_types = FALSE) %>%
+  rename(
+    name = `Common Name`,
+    lat = lat,
+    lon = lon,
+    value = `Sighting Count`
+  ) %>%
+  filter(!is.na(lat), !is.na(lon))

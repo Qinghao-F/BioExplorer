@@ -1,6 +1,9 @@
-name,lat,lon,category,value
-Royal Botanic Gardens,-37.8303,144.9800,Park,5
-Carlton Gardens,-37.8060,144.9717,Park,3
-Flagstaff Gardens,-37.8111,144.9546,Park,4
-Yarra Bend Park,-37.7910,145.0040,Park,2
-Birrarung Marr,-37.8184,144.9716,Park,1
+Site,Lon,Lat,Address,Little blue butterfly group,Cabbage white,Hesperiidae group,Small grass-yellow,Australian painted lady,Dingy swallowtail,Yellow admiral,Brown butterfly group,Macleay's swallowtail,Meadow argus
+Royal Park,144.954204,-37.78883102,Parkville VlC 3052,19,16,1,1,1,1,0,1,0,1
+Women Peace Gardens,144.9242849,-37.79085306,"16 Coopers Ln, Kensington VlC3031",21,8,3,3,1,0,1,0,0,0
+Fitzroy Gardens,144.9801215,-37.81250957,"Wellington Parade, EastMelbourne VlC 3002",12,5,5,5,0,0,0,0,0,0
+Carlton Gardens South,144.9714446,-37.80529554,"1-111 Carlton St, Carlton VIC 3053",17,3,1,1,0,1,1,0,1,0
+Argyle Square,144.9657082,-37.80245753,"Argyle Square, 13-19 Argyle PIN, Carlton VlC 3053",5,7,2,0,0,0,0,0,0,0
+Lincoln Square,144.9628464,-37.80220603,"Lincoln Square, Lincoln Square S, Carlton VlC 3053",7,1,0,0,3,0,0,0,0,0
+Garrard Reserve,144.9444913,-37.79360923,"287-315 Dryburgh St, North Melbourne VlC 3051",4,0,0,0,0,0,0,0,0,0
+Pleasance Gardens,144.9457176,-37.79619066,"Abbotsford St, North Melbourne, VIC 3051",3,0,0,0,0,0,0,0,0,0

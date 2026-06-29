@@ -1,0 +1,10 @@
+name: gardenapp
+title:
+username: qinghao
+account: qinghao
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 17564323
+bundleId: 12196981
+url: https://qinghao.shinyapps.io/gardenapp/
+version: 1

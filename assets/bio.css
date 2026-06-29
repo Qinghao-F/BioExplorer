@@ -1,0 +1,343 @@
+/* pages/biodiversity/assets/bio.css */
+html, body { height: 100%; margin: 0; padding: 0; }
+
+/* Remove gap between navbar and content area */
+.navbar, .navbar-default, .navbar-static-top, .navbar-fixed-top {
+  margin-bottom: 0 !important; border-bottom: none !important; box-shadow: none !important;
+}
+.container, .container-fluid { padding-left: 0 !important; padding-right: 0 !important; }
+.tab-content, .tab-pane { padding-top: 0 !important; border-top: none !important; }
+.well, .panel, .panel-body { margin-top: 0 !important; border-top: none !important; }
+
+/* Use CSS variable for navbar height; JS will override at runtime */
+:root { --nav-h: 56px; }
+
+/* Page root container height: full viewport minus navbar */
+#__bio_root__ { height: calc(100vh - var(--nav-h)); }
+
+/* Right map container: avoid z-index issues caused by overflow:hidden */
+.bio-map-container { position: relative !important; overflow: visible !important; z-index: 0 !important; }
+.leaflet-container { z-index: 10 !important; }
+
+/* Floating info panel: positioned at top-right to avoid being blocked */
+.floating-panel {
+  position: absolute; top: 16px; right: 20px; z-index: 1000;
+  background: rgba(255,255,255,0.95); border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25); padding: 12px;
+}
+
+/* Left side color scheme */
+.bio-side-panel {
+
+}
+
+/* Left side panel */
+.bio-side-panel {
+  width: 30%;
+  min-width: 200px;
+  max-width: 60%;
+  background: #b2dfdb; color: #004d40;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.1s ease;
+}
+
+
+.bio-left-sidebar {
+  padding: 8px; 
+  overflow-y:auto;
+}
+
+.empty-module {
+  height:70vh; 
+  min-height:320px; 
+  width:100%;
+               
+  display:flex; 
+  align-items:center; 
+  justify-content:center;
+               
+  border:1px dashed rgba(255,255,255,0.15); 
+  border-radius:12px; 
+  color:#9fb0c3;
+}
+
+
+
+/* Popup animation effects */
+/* === Soft Spring In (gentle bounce) for Leaflet popup ===
+   className is still set as "bio-popup-outer" in R               */
+
+/* Card body: slight lift + subtle bounce (more restrained) */
+.leaflet-popup.bio-popup-outer .leaflet-popup-content-wrapper{
+  animation: bio-soft-in 280ms cubic-bezier(.22, 1, .36, 1) both;
+  transform-origin: bottom center;
+  will-change: transform, opacity;
+  border-radius: 14px;
+  box-shadow: 0 14px 26px rgba(0,0,0,.12), 0 6px 12px rgba(0,0,0,.08);
+}
+
+@keyframes bio-soft-in{
+  0%   { opacity: 0; transform: translateY(6px)  scale(0.96); }
+  60%  { opacity: 1; transform: translateY(0px)  scale(1.015); } /* Slight overshoot */
+  100% { opacity: 1; transform: translateY(0px)  scale(1.000); }
+}
+
+/* Small triangle: keep rotate(45deg) to maintain sharp triangle shape
+   Previously looked like a square because animation overrode rotate(45deg) */
+.leaflet-popup.bio-popup-outer .leaflet-popup-tip{
+  width: 12px; height: 12px;           /* Slightly more refined than default */
+  background: #fff;                     /* Match card background */
+  border: 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+  animation: bio-tip-soft-in 280ms cubic-bezier(.22, 1, .36, 1) both;
+  transform-origin: top center;
+  /* Key: static style rotates into triangle (diamond) first, animation will preserve this rotation */
+  transform: rotate(45deg);
+}
+
+@keyframes bio-tip-soft-in{
+  0%   { opacity: 0; transform: translateY(4px) scale(0.95) rotate(45deg); }
+  100% { opacity: 1; transform: translateY(0px) scale(1.00) rotate(45deg); }
+}
+
+/* Optional: if you previously added that "paper glow" ::after, you can remove it for a more restrained look */
+.leaflet-popup.bio-popup-outer .leaflet-popup-content-wrapper::after{
+  content: none;
+}
+
+/* Disable animations when user prefers reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .leaflet-popup.bio-popup-outer .leaflet-popup-content-wrapper,
+  .leaflet-popup.bio-popup-outer .leaflet-popup-tip{
+    animation: none !important;
+  }
+}
+
+
+
+
+
+
+/* Radio buttons */
+.bio-filter-panel .shiny-options-group input[type="radio"] {
+  accent-color: #26a69a;
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.bio-filter-panel label {
+  font-weight: 600;
+  color: #2f4f4f;
+}
+
+.bio-layout {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+
+
+/* ✅ Middle divider */
+.bio-divider {
+  width: 2px;
+  cursor: col-resize;
+  background-color: lab(51.06% -34.65 -1.39);
+  transition: background-color 0.2s;
+}
+.bio-divider:hover {
+  background-color: lab(61.67% -36.06 -3.48);
+}
+
+/* Right map area */
+.bio-map-container {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+
+
+/* ===== Biodiversity popup overrides ===== */
+
+/* Remove Leaflet outer white frame and shadow, reset padding to zero */
+.leaflet-popup.bio-popup-outer .leaflet-popup-content-wrapper{
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  padding: 0 !important;
+}
+
+/* Remove default content margin to avoid top whitespace */
+.leaflet-popup.bio-popup-outer .leaflet-popup-content{
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Hide Leaflet default small triangle */
+.leaflet-popup.bio-popup-outer .leaflet-popup-tip-container{
+  display: none !important;
+}
+
+/* Close button: place on green header, change to white, add shadow for visibility */
+.leaflet-popup.bio-popup-outer .leaflet-popup-close-button{
+  top: 10px !important;       /* Place it inside the header */
+  right: 10px !important;
+  color: #fff !important;     /* White X icon */
+  font-size: 20px !important;
+  font-weight: 800 !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.35);
+  background: transparent !important;
+  z-index: 2;                 /* Layer above content */
+}
+
+
+/* ============================
+   🌿 Topbar nav-pills soft style
+   ============================ */
+
+.topbar-tabs .nav-link {
+  background: rgba(42, 157, 143, 0.08);   /* Light mint background */
+  color: #2a9d8f;
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 6px 16px;
+  margin: 0 4px;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.topbar-tabs .nav-link:hover {
+  background: rgba(42, 157, 143, 0.15);
+  color: #00695c;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(42, 157, 143, 0.25);
+}
+
+.topbar-tabs .nav-link.active {
+  background: linear-gradient(135deg, #26a69a, #00796b);
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+.topbar-tabs .nav-link:active {
+  transform: scale(0.97);
+}
+
+/* 🌸 Hover glow fade-in animation */
+.topbar-tabs .nav-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  opacity: 0;
+  box-shadow: 0 0 8px rgba(38, 166, 154, 0.4);
+  transition: opacity 0.4s ease;
+}
+
+.topbar-tabs .nav-link:hover::after {
+  opacity: 1;
+}
+
+/* Gentle fade-in animation (on page load) */
+@keyframes softFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.topbar-tabs .nav-link {
+  animation: softFadeIn 0.4s ease both;
+}
+
+/* Slightly reduce font and spacing for a more refined look */
+.topbar-tabs {
+  gap: 2px;
+  align-items: center;
+}
+
+.topbar-tabs .nav-link {
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+  position: relative;
+}
+
+
+
+
+.bio-tip {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  padding: 6px 10px;
+  font-family: system-ui, sans-serif;
+  animation: hoverSoftIn 200ms cubic-bezier(.25, .8, .25, 1) both;
+}
+@keyframes hoverSoftIn {
+  from { opacity: 0; transform: translateY(4px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+
+
+
+/* Make Leaflet tooltip outer container completely transparent, borderless, and shadowless */
+.leaflet-tooltip.bio-tip-host{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* Optional: prevent container from creating extra spacing */
+.leaflet-tooltip-pane .leaflet-tooltip.bio-tip-host {
+  margin: 0 !important;
+}
+
+/* Your card style (keep your preferred v2 style) */
+.bio-tip-v2{
+  --mint-3: #26a69a; --ink-1:#004d40; --ink-2:#1b5e57; --ink-3:#48636b;
+  background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(255,255,255,.94));
+  border-radius: 12px;
+  border: 1px solid rgba(38,166,154,.18);
+  box-shadow: 0 8px 18px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.06);
+  padding: 8px 12px 10px;
+  max-width: 260px;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
+  animation: btv2-in 220ms cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes btv2-in{
+  0%{opacity:0;transform:translateY(6px) scale(.98)}
+  60%{opacity:1;transform:translateY(0) scale(1.012)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+.btv2-row{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.btv2-accent{width:6px;height:18px;border-radius:3px;background:linear-gradient(180deg,var(--mint-3),#00796b);box-shadow:0 0 0 1px rgba(0,0,0,.02),0 2px 6px rgba(38,166,154,.35)}
+.btv2-name{font-weight:700;color:var(--ink-1);letter-spacing:.2px;line-height:1.1;font-size:.98rem;text-shadow:0 1px 0 rgba(255,255,255,.6)}
+.btv2-sub{color:var(--ink-2);font-size:.86rem;line-height:1.25;margin-bottom:6px}
+.btv2-meta{display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--ink-3)}
+.btv2-pin{fill:var(--mint-3);filter:drop-shadow(0 1px 0 rgba(255,255,255,.8))}
+
+/* Dark mode fine-tuning */
+@media (prefers-color-scheme: dark){
+  .bio-tip-v2{background:linear-gradient(180deg, rgba(27,33,38,.9), rgba(27,33,38,.88));
+              border-color:rgba(38,166,154,.28);box-shadow:0 10px 20px rgba(0,0,0,.35)}
+  .btv2-name{color:#e8f5f3;text-shadow:none}
+  .btv2-sub{color:#bde1db}
+  .btv2-meta{color:#c6d6d9}
+}
+@media (prefers-reduced-motion: reduce){
+  .bio-tip-v2{animation:none !important}
+}
+

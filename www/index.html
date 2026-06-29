@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BIOEXPLORER</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="bio-index">
+      <div class="bio-bg"></div>
+      <div class="bio-content">
+        <h1 class="bio-title">BIOEXPLORER</h1>
+        <p class="bio-sub">
+          Discover the living diversity of urban nature.<br />
+          Explore plants, butterflies, and gardens across Melbourne.
+        </p>
+
+        <div class="bio-loading" id="loading">
+          <div class="bio-loading-bar">
+            <div class="bio-loading-progress"></div>
+          </div>
+          <span>Loading ecosystem modules…</span>
+        </div>
+
+        <button class="bio-btn" id="exploreBtn" style="display: none">
+          Explore Now
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // Simulate loading animation, show button after 2.5s
+      setTimeout(() => {
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("exploreBtn").style.display = "inline-block";
+      }, 2500);
+
+      // Click button → notify parent window (Shiny) to switch to main interface
+      document.getElementById("exploreBtn").addEventListener("click", () => {
+        window.parent.postMessage("EXPLORE_NOW", "*");
+      });
+    </script>
+  </body>
+</html>
