@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#123c33" />
+    <meta
+      name="description"
+      content="Explore biodiversity, gardens, plants, butterflies and birds across Melbourne."
+    />
+    <title>BioExplorer — Melbourne Urban Nature</title>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin />
+    <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIINfQ3ynhQqzNVZB/akLpkLYxKjLV9B2pI="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script
+      defer
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#explorer">Skip to explorer</a>
+
+    <header class="site-header">
+      <a class="brand" href="#overview" aria-label="BioExplorer home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" role="img">
+            <path d="M24 39V17M24 24l-8-7M24 29l9-8M19 39h10" />
+            <circle cx="15" cy="14" r="7" />
+            <circle cx="31" cy="16" r="9" />
+            <circle cx="24" cy="9" r="7" />
+          </svg>
+        </span>
+        <span>
+          <strong>BIOEXPLORER</strong>
+          <small>Melbourne urban nature</small>
+        </span>
+      </a>
+
+      <nav class="top-nav" aria-label="Primary navigation">
+        <button class="nav-link is-active" type="button" data-view="overview">Overview</button>
+        <button class="nav-link" type="button" data-view="biodiversity">Biodiversity</button>
+        <button class="nav-link" type="button" data-view="plants">Plants</button>
+        <button class="nav-link" type="button" data-view="butterflies">Butterflies</button>
+        <button class="nav-link" type="button" data-view="birds">Birds</button>
+      </nav>
+
+      <a class="github-link" href="https://github.com/Qinghao-F/BioExplorer" target="_blank" rel="noreferrer">
+        View source
+        <span aria-hidden="true">↗</span>
+      </a>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span> A living map of Melbourne</p>
+          <h1 id="hero-title">Meet the wild city hiding in plain sight.</h1>
+          <p class="hero-intro">
+            Follow sightings through gardens, discover the plants shaping urban habitats,
+            and compare butterfly and bird communities across Melbourne.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#explorer">Explore the data</a>
+            <button class="button button-secondary" type="button" data-view="biodiversity">Open biodiversity map</button>
+          </div>
+          <p class="hero-note">No sign-in. No server wait. Data loads only when you explore it.</p>
+        </div>
+
+        <div class="hero-visual" aria-label="Illustrated map of Melbourne's urban nature">
+          <div class="hero-orbit orbit-one"></div>
+          <div class="hero-orbit orbit-two"></div>
+          <div class="hero-card hero-card-main">
+            <span class="map-label">MELBOURNE</span>
+            <svg class="melbourne-line" viewBox="0 0 500 360" aria-hidden="true">
+              <path d="M42 241c42-56 88-94 132-112 48-19 74-61 127-71 54-10 114 21 157 65-17 56-51 91-99 110-69 27-112 79-184 67-56-9-91-27-133-59Z" />
+              <path d="M116 238c58-28 87-84 148-98 56-12 102 13 150 58" />
+              <path d="M170 112c10 61 48 108 104 157" />
+            </svg>
+            <span class="nature-pin pin-a"><i></i><b>Gardens</b></span>
+            <span class="nature-pin pin-b"><i></i><b>Birds</b></span>
+            <span class="nature-pin pin-c"><i></i><b>Plants</b></span>
+            <span class="nature-pin pin-d"><i></i><b>Butterflies</b></span>
+          </div>
+          <div class="hero-card floating-stat stat-a">
+            <span>Species records</span>
+            <strong data-summary="observations">—</strong>
+          </div>
+          <div class="hero-card floating-stat stat-b">
+            <span>Garden plants</span>
+            <strong data-summary="plantSpecies">—</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="metric-strip" aria-label="Dataset summary">
+        <article>
+          <span class="metric-icon metric-green">●</span>
+          <div><strong data-summary="observedSpecies">—</strong><span>observed species</span></div>
+        </article>
+        <article>
+          <span class="metric-icon metric-lime">✦</span>
+          <div><strong data-summary="plantRecords">—</strong><span>plant assessments</span></div>
+        </article>
+        <article>
+          <span class="metric-icon metric-gold">◒</span>
+          <div><strong data-summary="birdSpecies">—</strong><span>bird species</span></div>
+        </article>
+        <article>
+          <span class="metric-icon metric-coral">∞</span>
+          <div><strong data-summary="butterflySites">—</strong><span>butterfly survey sites</span></div>
+        </article>
+      </section>
+
+      <section class="explorer-section" id="explorer" aria-labelledby="explorer-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow"><span></span> Interactive field guide</p>
+            <h2 id="explorer-title">Explore the urban ecosystem</h2>
+          </div>
+          <p>Choose a dataset, filter what matters, and inspect individual locations.</p>
+        </div>
+
+        <div class="view-tabs" role="tablist" aria-label="Explorer datasets">
+          <button role="tab" aria-selected="true" class="view-tab is-active" data-view="overview">Overview</button>
+          <button role="tab" aria-selected="false" class="view-tab" data-view="biodiversity">Biodiversity</button>
+          <button role="tab" aria-selected="false" class="view-tab" data-view="plants">Plants</button>
+          <button role="tab" aria-selected="false" class="view-tab" data-view="butterflies">Butterflies</button>
+          <button role="tab" aria-selected="false" class="view-tab" data-view="birds">Birds</button>
+        </div>
+
+        <div class="explorer-card" id="view-root" aria-live="polite">
+          <div class="loading-state">
+            <span class="loading-leaf">⌁</span>
+            <p>Preparing the explorer…</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="about-section">
+        <div>
+          <p class="eyebrow eyebrow-light"><span></span> About the project</p>
+          <h2>One city, many layers of life.</h2>
+        </div>
+        <p>
+          BioExplorer brings several public Melbourne nature datasets into one visual story.
+          It is designed for quick exploration: each view runs entirely in your browser and
+          links observations back to place, season and habitat.
+        </p>
+        <a href="https://github.com/Qinghao-F/BioExplorer" target="_blank" rel="noreferrer">Explore the repository <span>↗</span></a>
+      </section>
+    </main>
+
+    <footer>
+      <a class="brand brand-footer" href="#overview">
+        <span class="brand-mark" aria-hidden="true">✣</span>
+        <span><strong>BIOEXPLORER</strong><small>Melbourne urban nature</small></span>
+      </a>
+      <p>Built from open biodiversity and City of Melbourne datasets.</p>
+      <p>Map data © OpenStreetMap contributors</p>
+    </footer>
+
+    <noscript>This interactive website requires JavaScript.</noscript>
+  </body>
+</html>
