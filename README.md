@@ -2,7 +2,7 @@
 
 An interactive, browser-based guide to Melbourne's urban biodiversity.
 
-**Live demo:** https://qinghao-f.github.io/BioExplorer/
+**Live demo:** [Open the Shiny app](https://qinghao.shinyapps.io/gardenapp/)
 
 The GitHub Pages experience is a static website in `docs/`. It includes:
 
@@ -26,4 +26,4 @@ GitHub Pages should publish from the `docs/` folder on the `main` branch.
 
 ## Legacy Shiny app
 
-The original Shiny implementation remains in the repository for reference. Its entry point is `app.R`.
+The original Shiny implementation remains in the repository for reference. You can try the [Shiny live app](https://qinghao.shinyapps.io/gardenapp/) or launch it locally from `app.R`.
